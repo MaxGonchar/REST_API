@@ -1,0 +1,45 @@
+Practical API design patterns
+
+Tools for building and testing REST APIs
+
+Designing relationships between resources
+
+
+
+SSL, TLS, and HTTPS
+
+Ok, "Cryptographic Protocols" or "Transport Layer Security.", thanks
+Is there any other things on top of SSL, TLS, HTTPS I should know to feel free in this area?
+
+To feel truly comfortable in this area, you shouldn't just know the protocols (SSL/TLS), but also the ecosystem that makes them work. Here are the key concepts and technologies that sit "on top" or alongside them:
+
+**1. Public Key Infrastructure (PKI)**
+This is the framework that manages the creation, distribution, and revocation of digital certificates. Without PKI, SSL/TLS wouldn't scale because you wouldn't know who to trust. It involves the hierarchy of trust.
+
+**2. X.509 Certificates**
+This is the specific format of the digital certificates used in TLS. A certificate acts like a digital passport for a website. It contains the public key and the identity of the website (like `google.com`), signed by a Certificate Authority.
+
+**3. Certificate Authorities (CAs)**
+These are the trusted organizations (like DigiCert, Let's Encrypt, or GlobalSign) that sign certificates. Your browser and operating system come pre-loaded with a list of CAs they trust. If a site presents a certificate signed by a CA on that list, your browser accepts it.
+
+**4. Certificate Revocation Lists (CRL) & OCSP**
+Sometimes a private key is stolen or a certificate is issued by mistake. CRLs and OCSP (Online Certificate Status Protocol) are methods your browser uses to check if a certificate is still valid or if it has been revoked (cancelled) by the CA.
+
+**5. HSTS (HTTP Strict Transport Security)**
+This is a web security policy mechanism that forces browsers to interact with the website *only* over HTTPS. It prevents attackers from downgrading a connection from secure HTTPS to insecure HTTP (a "downgrade attack").
+
+**6. Certificate Pinning**
+This is a security measure where an application (like a mobile banking app) hardcodes the specific certificate or public key it expects. This prevents Man-in-the-Middle attacks even if a legitimate CA is compromised or tricked into issuing a fake certificate for that domain.
+
+**7. Perfect Forward Secrecy (PFS)**
+This is a property of the specific encryption algorithms (cipher suites) used within TLS. It ensures that if the server's private key is stolen in the future, the attacker cannot decrypt past recorded traffic. Every session uses a unique, temporary key.
+
+Understanding these concepts gives you the full picture of not just *how* the data is encrypted (TLS), but *how* the trust is established (PKI/CAs) and *how* the integrity is maintained (HSTS/Pinning).
+
+
+
+
+
+
+
+network security fundamentals
